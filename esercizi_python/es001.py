@@ -1,3 +1,4 @@
+#es001
 def main(): #main, i blocchi si dividono identando
     nome = input("Come di chiami? \n")#va a capo sempre la print
     anni = int(input("Quanti anni hai? \n"))#va a capo sempre la print

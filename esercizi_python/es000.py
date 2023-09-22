@@ -1,3 +1,4 @@
+#es000
 print("Hello world") #non servono i ;
 
 nome = "Luca"

@@ -1,3 +1,4 @@
+#es002
 def main():
     a = float(input("Inserisci un numero: "))
 
