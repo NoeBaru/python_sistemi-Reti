@@ -1,4 +1,11 @@
-#es008 pag.40 es.3
+"""
+Author: Noemi Baruffolo
+date: 26/09/2023
+es. 008
+text: Scrivere un programma che permetta di effettuare le quattro operazioni aritmetiche. Per prima cosa chiede all'utente quale
+operazione desidera eseguire (0: somma, 1: sottrazione, 2: moltiplicazione, 3: divisione), poi chiedere all'utente due numeri e stampare
+il risultato dell'operazione
+"""
 
 def main():
     operatore = int(input("Inserisci il numero corrispndente all'operatore del calcolo che si vuole effettuare: "))

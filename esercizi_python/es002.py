@@ -1,4 +1,10 @@
-#es002
+"""
+Author: Noemi Baruffolo
+date: /09/2023
+es. 002
+text: dato un numero in input dire se e' > 5 o compreso tra 0 e 5 o < di 0
+"""
+
 def main():
     a = float(input("Inserisci un numero: "))
 

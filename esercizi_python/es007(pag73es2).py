@@ -1,4 +1,10 @@
-#es007 pag.40 es.2
+"""
+Author: Noemi Baruffolo
+date: 26/09/2023
+es. 007
+text: chidere un numero in input e comunicare all'utente se questo numero è divisibile per 2, 3 o per 5, o per nessuno di essi. Per
+verificare la divisibilità può esserti utile l'operatore resto '%'. L'espressione 'a % b' calcola il resto della divisione tra 'a' e 'b'
+"""
 
 def main():
     num = int(input("Inserisci un numero: "))
