@@ -1,39 +1,55 @@
 """
 Author: Noemi Baruffolo
 date: 3/10/2023
-es. 010
+es. 011
 text: fare i poligioni, ciascuno con colori diversi tutti nella stessa schermata usando comandi come turtle.penup
 """
 
 import turtle
 
-numP = int(input("Inserisci il numero di poligoni: "))
-lung = int(input("Inserisci la lunghezza del primo lato: "))
-spazioVuoto = 70  # Spazio tra i poligoni
-poligoniRiga = 3  # Numero di poligoni per ogni riga
+def disegnaPoligono(arrow, num, lato):
+    gradi = 360 / num
+    arrow.begin_fill() #inizia il riempimento della freccia
+    for i in range(0, num):
+        arrow.forward(lato)
+        arrow.left(gradi)
+    arrow.end_fill #la freccia termina il riempimento
 
-window = turtle.Screen()
-arrow = turtle.Turtle()
-colori = ["red", "green", "blue", "orange", "purple", "yellow"]
 
-x = -((numP - poligoniRiga) * (lung + (spazioVuoto * 2))) / 2
-y = 0
-
-for i in range(3, numP + 3):
-    colore = colori[i % len(colori)]
-    arrow.penup()
+def posizionaArrow(arrow, num, lato, x, y):
+    arrow.penup() # si muove la freccia senza disegnare
+    if(num % 3 == 0):
+        x = -100
+        y = y + lato * 4
+    else:
+        x = x + lato * 4
     arrow.goto(x, y)
     arrow.pendown()
-    arrow.color(colore)
-    arrow.begin_fill()
-    for _ in range(i):
-        arrow.forward(lung)
-        arrow.left(360 / i)
-    arrow.end_fill()
-    x += lung + spazioVuoto
+    return x, y
 
-    if (i - 2) % poligoniRiga == 0:
-        x = -((numP - poligoniRiga) * (lung + spazioVuoto)) / 2
-        y -= 2 * lung
+def main():
+    x = 0
+    y = -100
 
-window.mainloop()
+    min = 3
+    max = 12
+
+    lato = int(input("Inserisci la lato altezza del primo lato: "))
+
+    window = turtle.Screen()
+    arrow = turtle.Turtle()
+
+    #arrow = arrow.shape("turtle") per fare la forma della tartaruga
+    arrow.color("violet") #imposto il colore
+
+    arrow.speed("slow") #velocità della freccia
+
+
+    for num in range(min, max):
+        x, y = posizionaArrow(arrow, num, lato)
+        disegnaPoligono(arrow, num, lato)
+
+    window.mainloop()
+
+if __name__=="__main__": 
+    main()
