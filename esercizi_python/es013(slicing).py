@@ -17,6 +17,6 @@ def main():
     print(f"Tutta la stringa escluso il primo carattere e l'ultimo: {s2[1:-1]}")
     print(f"Tutta la stringa escluso il primo carattere: {s2[1:]}") #ESCLUDE il primo e l'ultimo
     print(f"Tutta la stringa escluso l'ultimo: {s2[:-1]}") #funziona anche se si mette 0 al posto di nulla
-    print(f"Tutta la stringa al contrario: {s2[::-1]}")
+    print(f"Tutta la stringa al contrario: {s2[::-1]}") #specchia la stringa
 if __name__=="__main__": 
     main()
