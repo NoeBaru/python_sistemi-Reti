@@ -1,0 +1,9 @@
+IP di classe c, primi tre numeri sono per la rete, quelli dopo da 1 a 254 sono per i nostri dispositivi.
+255 è il nostro broadcast (se mandiamo un messaggio , il terminale lo inivierà al pc) per mandare messagi a tutti i pc della rete.
+
+Per settare l'indirizzo IP:
+-vado sul pc-->config-->ethernet bla bla--> indirizzo IP
+oppure
+-vado sul pc-->desktop-->prima app--> indirizzo IP
+
+Ping-->desktop-->scrivo IP
