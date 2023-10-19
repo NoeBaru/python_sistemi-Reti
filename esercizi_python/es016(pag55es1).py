@@ -6,7 +6,11 @@ text: Scrivi un programma in Python in cui inizializzi 4 variabili con un intero
 Stampa i valori delle variabili e i loro tipi (con la funzione type()).
 """
 def main():
-    
+    intero = 2
+    stringa = "ciao"
+    reale = 2.5
+    booleano = True
 
+    print(f"numero intero: {intero} {type(intero)} stringa: {stringa} {type(stringa)} numero reale: {reale} {type(reale)} booleano: {booleano} {type(booleano)}")
 if __name__=="__main__": 
     main()

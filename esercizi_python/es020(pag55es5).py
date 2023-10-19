@@ -6,7 +6,7 @@ text: Scrivi un programma in Python che, assegnata una parola a una variabile st
 iniziali e finali della parola.
 """
 def main():
-    
-
+    stringa = "ciao"
+    print(f"{stringa[1:-1]}")
 if __name__=="__main__": 
     main()

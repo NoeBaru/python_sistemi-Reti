@@ -8,8 +8,22 @@ Sfrutta l' indicizzazione per:
 - sostituire il quarto voto con un 10;
 - stampare i primi 3 voti della lista.
 """
+
+def print_list(lista):
+    print("La lista e': ", end="")
+    for elemento in lista:
+        print(elemento, end=" ") #con end=" "non va a capo dopo ogni elemento, ma mette uno spazio e continua sulla stessa riga
+    print("\n")
+
 def main():
-    lista_voti = []
+    lista_voti = [5, 6, 7, 8, 9, 10]
+    print("Lista senza il primo e l'ultimo voto: ")
+    print_list(lista_voti[1:-1])
+
+    lista_voti[3] = 10
+
+    print("Primi 3 voti della lista: ")
+    print_list(lista_voti[:3])
 
 if __name__=="__main__": 
     main()
