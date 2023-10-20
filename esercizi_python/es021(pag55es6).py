@@ -8,10 +8,16 @@ text: Scrivi un programma in Python che, assegnata una parola a una variabile st
 
 def main():
     stringa = "ciao"
+    
+
+def main():
+    stringa = "ciao"
+    print(stringa[1::2]) #stampa saltando di due, quindi solo caratteri dispari
+    '''
     lung = len(stringa)
     for i in range(lung):
-        if i % 2 == 1:
-            print(stringa[i], end="")
+        if i % 2 != 0:
+            print(stringa[i], end="")'''
 
 if __name__=="__main__": 
     main()

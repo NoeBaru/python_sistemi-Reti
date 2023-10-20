@@ -16,7 +16,16 @@ def print_list(lista):
     print("\n")
 
 def main():
-    lista_voti = [5, 6, 7, 8, 9, 10]
+    lista_voti = []
+    cont = 0
+
+    while True:
+        voto = int(input("Inserisci un voto (-1 per interrompere): "))
+        if (voto < 0 and cont >= 6):
+            break
+        lista_voti.append(voto)
+        cont += 1
+
     print("Lista senza il primo e l'ultimo voto: ")
     print_list(lista_voti[1:-1])
 

@@ -15,14 +15,12 @@ def print_list(lista):
 def main():
     x = [0, 1, 2, 3, 5, 6, 7, 8]
 
-    meta = len(x) // 2
+    meta = len(x) // 2 #divisione intera, non risultato esatto della divisione
 
     sxMeta = x[:meta]
     dxMeta = x[meta:]
 
-    num = 5
-
-    sxMeta.append(num)
+    sxMeta.append(dxMeta[0])
 
     print("La prima meta' e': ", end="")
     print_list(sxMeta)
