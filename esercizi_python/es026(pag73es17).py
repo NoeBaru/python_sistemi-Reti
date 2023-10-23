@@ -6,6 +6,8 @@ text: Utilizza le list comprehension per scrivere un programma che crei una list
 valore inserito dall'utente. Stampa la lista.
 """
 
+import math
+
 def print_list(lista):
     print("La lista e': ", end="")
     for elemento in lista:
@@ -14,7 +16,8 @@ def print_list(lista):
 
 def main():
     numero = int(input("Inserisci un numero: "))
-    potenze = [2**i for i in range(numero + 1) if 2**i <= numero]
+    esponente = int(math.log2(numero))
+    potenze = [2**i for i in range(esponente + 1)]
     print_list(potenze)
 
 if __name__=="__main__": 

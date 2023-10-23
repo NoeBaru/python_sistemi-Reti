@@ -6,15 +6,14 @@ text: Utilizza le list comprehension per creare la tavola pitagorica per i numer
 """
 
 def print_tabellina(tabellina):
-    for row in tabellina:
-        for element in row:
-            print(element, end=" ")
-        print()
-
+    file = open("tabelline.txt", "w")
+    for cont, element in enumerate(tabellina): #enumerate numera le liste, ritorna indice(cont) ed elemento(element)
+        print(f"Tabellina del {cont + 1}: {element}") #element è una lista, tabellina è una lista di liste
+        file.write(f"Tabellina: {element}\n")
+    file.close()
 def main():
     n = 10
     tabellina = [[i * j for j in range(1, n + 1)] for i in range(1, n + 1)]
-    print_tabellina(tabellina)
-    
+    print_tabellina(tabellina)       
 if __name__=="__main__": 
     main()
