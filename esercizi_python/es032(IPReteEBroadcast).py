@@ -4,6 +4,7 @@ date: 25/10/2023
 es. 032 IPReteEBroadcast
 text: Es: fare un programma che chieda all'utente un indirizzo IP e una subnet mask in notazione CIDR: calcolare IP di rete e IP di broadcast.
 """
+#format(45,'08b') con lo 0 perché sennò mette spazi vuoti, idem per esadecimale con 016
 
 def main():
     ip = input("Inserisci un indirizzo IP: ")
@@ -12,7 +13,7 @@ def main():
     groups = ip.split('.') #per dividere l'IP in gruppetti guardando i punti
     groups = [int(group) for group in groups]
     
-    subnet = ('1' * n + '0' * (32 - n)) #per calcolare l'IP di reete
+    subnet = ('1' * n + '0' * (32 - n)) #per calcolare l'IP di rete
     network_groups = [str(groups[i] & int(subnet[i * 8:(i + 1) * 8], 2)) for i in range(4)]
     
     broadcast_groups = [str(groups[i] | (255 - int(subnet[i * 8:(i + 1) * 8], 2))) for i in range(4)] #per calcolare IP broadcast
