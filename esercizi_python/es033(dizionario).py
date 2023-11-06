@@ -1,10 +1,9 @@
 """
 Author: Noemi Baruffolo
 date: 25/10/2023
-es. 033 diizonario
+es. 033 dizonario
 text: dizionario: collezione di coppie: chiave (un solo tipo) e valore, non ha indici, ma si indicizza per chiave
 lista: come dizionario, ma senza la chiave e quindi la posizione, sennò bisogna ricordarsi che il nome è pos[0]
-
 """
 def main():
     dizionario = {"nome": "Mario", "cognome": "Rossi"} #nome e cognome sono chiave , Mario e Rossi sono valore
