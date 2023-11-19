@@ -11,27 +11,30 @@ Crea un programma in linguaggio Python 3 nel quale:
 della sequenza.
 """
 
-def cercaCovid(covid):
-    tro = False
-        if str == covid:
-    return tro
+def cercaCovid(seq, covid):
+    return seq.find(covid)
 
-def cercaOccorrenze(carattere):
-    pass
+def contaOccorrenze(seq, nucleotide):
+    return seq.count(nucleotide)
 
 def main():
-    str = ""
+    seq = ""
     covid = "ATGTTTGTTTTT"
-    nucleotidi = {"A": cercaOccorrenze("A"), "T": cercaOccorrenze("T"), "G": cercaOccorrenze("G"), "C": cercaOccorrenze("C")}
-    file = open("covid-19_gen1.txt", "r")
-    numR = len(file.readlines())
-    str = file.readlines()
-    file.close()
-    for i in numR:
-        if((i != numR - 1) & (str[i] == "\n")):
-            str[i] == str[i + 1]
-    print(numR)
-    tro = cercaCovid(covid)
+    nucleotidi = {"A": 0, "T": 0, "G": 0, "C": 0}
     
+    with open("covid-19_gen1.txt", "r") as file:
+        seq = file.read().replace("\n", "")
+
+    for nucleotide in nucleotidi:
+        nucleotidi[nucleotide] = contaOccorrenze(seq, nucleotide)
+    
+    print("Numero di occorrenze di ogni nucleotide nella sequenza:", nucleotidi)
+    
+    posizione = cercaCovid(seq, covid)
+    if posizione != -1:
+        print("Sequenza trovata alla posizione:", posizione)
+    else:
+        print("Sequenza non trovata nel genoma.")
+
 if __name__ == '__main__':
     main()
