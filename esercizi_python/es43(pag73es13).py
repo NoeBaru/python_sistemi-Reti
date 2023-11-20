@@ -15,7 +15,7 @@ class Robot:
     def stampaNome(self):
         print(f"Il robot si chiama {self.nome}")
     def isPericoloso(self):
-        return self.tipologia == 'umanoide' and self.massa > 100  #controlla se è umanoide e ha massa > 100 kg
+        return self.tipologia == 'umanoide' and self.massa > 100
 
 def main():
     r1 = Robot("Noemi", 100, 'umanoide')
