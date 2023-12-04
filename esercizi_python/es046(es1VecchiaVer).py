@@ -14,13 +14,14 @@ interi giorni di pazzia.
 
 import random #per una lista uso random.choice e estrae a caso uno degli elementi
 
-def spostamenti():
-    pass
+def spostamentoRandom():
+    return random.choice([-1, 1])
 
 def main():
-    spostamenti = [1, 1]
-    lista = [(random.choice[spostamenti]) for valore in range somma += valore]
-    print(lista)
+    movimenti = [spostamentoRandom() for _ in range(5 * 24 * 60 * 60)]
+    spostamentoTot = sum(movimenti)
+
+    print(f"Spostamento totale dopo 5 giorni: {spostamentoTot} cm")
 
 if __name__ == '__main__':
     main()
