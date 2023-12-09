@@ -1,11 +1,12 @@
-def push(pila, elemento):
-    pila.append(elemento)
+def push(pila, elemento, posizione):
+    pila.append((elemento, posizione))
 
 def pop(pila):
     if len(pila) == 0:
-        x = None
+        return None
     else:
-        x = pila.pop()
+        return pila.pop()
+
     return x
 
 def main():
@@ -22,21 +23,28 @@ def main():
     str = "{1+[2+3]*5}"
     pila = []
     errore = False
+    posizione = 0
     for carattere in str:
+        posizione += 1
+
         if carattere in parentesiAperte:
-            push(pila, carattere)
-            
+            push(pila, carattere, posizione)
+
         if carattere in parentesiChiuse:
             parentesi = pop(pila)
-            if(parentesi != None):
-                if dizionario[parentesi] != carattere:
-                    errore = True
-                    break
-            else:
+            if parentesi is None or dizionario[parentesi[0]] != carattere:
                 errore = True
-    if errore:
-        print("Errore!")
-    else:
-        print("Corretto!")
+                print(f"Errore! Parentesi non corrispondenti alla posizione {posizione}")
+                break
+
+    if not errore and len(pila) > 0:
+        carattere, posizione = pila[-1]
+        print(f"Errore! Parentesi non chiuse alla posizione {posizione}")
+    elif not errore:
+        if len(pila) == 0:
+            print("Corretto!")
+        else:
+            carattere, posizione = pila[-1]
+            print(f"Errore! Parentesi mancante alla posizione {posizione}")
 if __name__ == '__main__':
     main()
