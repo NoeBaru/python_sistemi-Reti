@@ -69,9 +69,6 @@ class CarRacing:
             self.gameDisplay.fill(self.black)  #riempie lo sfondo con il colore nero
             self.backgroundRoad()  #mostra lo sfondo
 
-            pygame.display.update()  #aggiorna la schermata
-            self.clock.tick(60)  #imposta il clock del gioco a 60 FPS
-
             self.runEnemyCar(self.enemyCarStartX, self.enemyCarStartY) #disegna la macchina nemica sulla schermata di gioco alle coordinate specificate
             self.enemyCarStartY += self.enemyCarSpeed #incrementa la coordinata y della macchina nemica per fare l'effetto di movimento di caduta dall'alto
 

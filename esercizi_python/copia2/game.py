@@ -56,20 +56,15 @@ class CarRacing:
     def runCar(self):
 
         while not self.crashed:
-
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.crashed = True
-                #print(event)
 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LEFT:
                         self.carXCoordinate -= 50
-                        #print("CAR X COORDINATES: %s" % self.carXCoordinate)
                     if event.key == pygame.K_RIGHT:
-                        self.carXCoordinate += 50
-                        #print("CAR X COORDINATES: %s" % self.carXCoordinate)
-                    #print("x: {x}, y: {y}".format(x=self.carXCoordinate, y=self.carYCoordinate))
+                        self.carXCoordinate += 50                 #print("x: {x}, y: {y}".format(x=self.carXCoordinate, y=self.carYCoordinate))
 
             self.gameDisplay.fill(self.black)
             self.backgroundRoad()
