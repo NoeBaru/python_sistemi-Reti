@@ -1,15 +1,19 @@
 import turtle
-import csv
 import random
 
+class Punto(): #modo per fare una struttura perché classe senza metodo
+    def __init__(self, x, y): #costruttore
+        self.x = x
+        self.y = y
+
 def move_turtle(t, direction):
-    if direction == 1:
+    if direction == 0:
         t.setheading(90)  #nord
-    elif direction == 2:
+    elif direction == 1:
         t.setheading(270)  #sud
-    elif direction == 3:
+    elif direction == 2:
         t.setheading(0)  #est
-    elif direction == 4:
+    elif direction == 3:
         t.setheading(180)  #ovest
     t.forward(10)
 
@@ -32,33 +36,32 @@ def main():
           Infine salva il percorso di Bob dentro un file .csv opportunamente strutturato.
           BONUS: ogni volta in cui Bob passa in un punto della città di Flatland in cui è già passato, stampa a schermo le coordinate
           del punto.
-    """    
+    """
     t = turtle.Turtle()
     screen = turtle.Screen()
-    screen.setup(width=600, height=600)
-
-    coordinates = [(0, 0)]  #coordinate iniziali
+    screen.setup(width = 600, height = 600)    
+    percorso = {0: Punto(0,0)}
     old = set()
-    old.add((0, 0))
     
-    for _ in range(60):
-        direction = random.randint(1, 4)  #direzione scelta casualmente
-        move_turtle(t, direction)
-        x, y = t.pos()
-        if (x, y) in old:
-            print(f"Coordinate già visitate: ({x}, {y})")
-        old.add((x, y))
-        coordinates.append((x, y))
-
-    t.hideturtle()
-    screen.update()
-
-    with open('bobCoordinate.csv', 'w', newline='') as file:
-        csv_writer = csv.writer(file)
-        csv_writer.writerow(['X', 'Y'])
-        csv_writer.writerows(coordinates)
-
-    turtle.done()
-
+    for tempo in range(0, 60):
+        #simulare movimenti casuali
+        #disegnare percorso con turtle
+        for _ in range(60):
+            direction = random.randint(0, 3)  #direzione scelta casualmente
+            move_turtle(t, direction)
+            x, y = t.pos()
+    
+        #BONUS: controllo passaggio punto già visitato
+            if (x, y) in old:
+                print(f"Coordinate già visitate: ({percorso[minuto].x}, {percorso[minuto].y})")
+        
+        #scrittura sul file dle percorso
+        #COLONNE: minuto, x, y
+        with open("bobPercorso.csv", "w") as file:
+            #ciclo sul dizionario percorso
+            for minuto in percorso:
+                posX = percorso[minuto].x
+                file.write(f"min: {percorso[minuto]} x: {percorso[minuto].x} y: {percorso[minuto].y}")
+    
 if __name__ == '__main__':
     main()
