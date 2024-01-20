@@ -23,7 +23,7 @@ def main():
     - Infine calcola la somma degli spostamenti casuali per ottenere lo spostamento complessivo accumulato in 5 giorni.
     """
     
-    sec = 432000
+    sec = (60*60*24)*5
     lista = [-1, 1]
     
     calcolaSpostamenti(1000, [3,-3]) #passaggio parametri con valore di def (posso specificare anche solo un parametro o nessuno (basta sia nel giusto ordine))

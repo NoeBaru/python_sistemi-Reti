@@ -48,6 +48,7 @@ def main():
     for riga in righeFile:
         #riga.replace("\n", "")
         riga = riga[:-1]
+        
         genoma += riga
 
     a, c, g, t =  contaNucleotidi(genoma)

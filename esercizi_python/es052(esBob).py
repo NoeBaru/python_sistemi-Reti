@@ -21,7 +21,7 @@ def main():
     """
     Author: Noemi Baruffolo
     date: 9/01/2024
-    es. Bob
+    es. 52 Bob
     text: Il nostro amico Bob dopo alcune commissioni in giro per la città di Flatland deve rientrare a casa.
           Purtroppo Bob soffre di momentanee perdite di memoria! Questa volta la sua amnesia dura ben 60 minuti
           e durante questi 60 minuti Bob adotta la seguente strategia per tentare di rientrare a casa. Ogni
@@ -58,10 +58,11 @@ def main():
         #scrittura sul file dle percorso
         #COLONNE: minuto, x, y
         with open("bobPercorso.csv", "w") as file:
+            file.write("min, X, Y")
             #ciclo sul dizionario percorso
             for minuto in percorso:
                 posX = percorso[minuto].x
-                file.write(f"min: {percorso[minuto]} x: {percorso[minuto].x} y: {percorso[minuto].y}")
+                file.write(f"{minuto}, {x}, {y}")
     
 if __name__ == '__main__':
     main()

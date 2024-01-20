@@ -22,11 +22,12 @@ def main():
     file = open("rubrica.txt", "r")
     listaRighe = file.readlines()
     file.close()
+    
     for riga in listaRighe:
         campi = riga.split(", ")#restituisce lista
         nome = campi[0]
         numeroTel = int(campi[1][:-1])
-        d[numeroTel] = nome
+        [numeroTel] = nome
     nomeDaTrovare = input("inserisci il nome da cercare: ")
     numTelTrovato = cercaNomeInDiz(nomeDaTrovare, rubrica)
     print(f"numero telefono di {nomeDaTrovare} è {numTelTrovato} (se il numero di telefono è 0, non esiste un contatto di nome {nomeDaTrovare})")
