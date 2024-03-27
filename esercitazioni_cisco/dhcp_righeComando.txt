@@ -1,0 +1,9 @@
+Nel CLI del router:
+
+ip dhcp pool laboratorio
+network 192.168.1.0 255.255.255.0
+default-router 192.168.1.1
+dns-server 8.8.8.8
+ip dhcp excluded-address 192.168.1.1 192.168.1.100
+end
+write memory
