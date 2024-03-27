@@ -1,38 +1,81 @@
-import csv
 import pygame
 
-def leggiFilCsv(nomeFile):
-    matrice = []
-    with open(nomeFile, 'r') as file:
-        lettoreCsv = csv.reader(file)
-        for riga in lettoreCsv:
-            matrice.append([int(valore) for valore in riga])
-    return matrice
+LATOX = 100
+LATOY = 100
 
-def disegnaMat(matrice):
-    righe = len(matrice)
-    colonne = len(matrice[0])
-    dimensioneCella = 170
-    blackColor = (255, 255, 255)
-    whiteColor = (0, 0, 0)
+class Cella():
+    def __init__(self, n):
+        self.size = (LATOX, LATOY)
+        self.num = n
+        self.numerata = True
+        if n != 0:
+            self.color = "red"
+            self.numerata = False
+        else:
+            self.color = "green"
+        self.surf = pygame.Surface(self.size)
+        self.surf.fill(self.color)
 
-    pygame.init()
-    finestra = pygame.display.set_mode((colonne * dimensioneCella, righe * dimensioneCella))
+def mat2d_adiacenze(m: list[list]):
+    return {i: [j for j, n in enumerate(m[i]) if n != 0] for i in range(len(m))}
 
-    while True:
-        for evento in pygame.event.get():
-            if evento.type == pygame.QUIT:
-                pygame.quit()
-                quit()
+def matrice_da_file(nome_file: str):
+    mat = []
+    with open(nome_file, "r") as file:
+        for riga in file.readlines():
+            t = riga.split(", ")
+            mat.append([int(stringa[0]) for stringa in t])
+    return mat
 
-        finestra.fill((255, 255, 255)) #nero
+def disegna_matrice(screen: pygame.Surface, mat: list[list[Cella]]):
+    text = pygame.font.Font(size = LATOX // 2)
+    numero_in_cella = 0
+    for i, riga in enumerate(mat):
+        y = LATOY * i
+        for j, cella in enumerate(riga):
+            screen.blit(cella.surf, (LATOX * j, y))
+            if cella.numerata:
+                surf = text.render(f"{numero_in_cella}", True, "black")
+                rect = surf.get_rect()
+                rect.topleft= (LATOX * j + 8, y + 8)
+                screen.blit(surf, rect)
+                numero_in_cella += 1
+    pygame.display.update()
 
-        for riga in range(righe):
-            for colonna in range(colonne):
-                colore = whiteColor if matrice[riga][colonna] == 1 else blackColor #bianco, altrimenti nero
-                pygame.draw.rect(finestra, colore, (colonna * dimensioneCella, riga * dimensioneCella, dimensioneCella, dimensioneCella))
 
-        pygame.display.update()
+def matrice_numerata(mat):
+    mat_numerata = []
+    numero_cella = 0
+    for riga in mat:
+        nuova_riga = []
+        for cella in riga:
+            if cella != 0:
+                nuova_riga.append(-1)
+            else:
+                nuova_riga.append(numero_cella)
+                numero_cella += 1
+        mat_numerata.append(nuova_riga)
+    return mat_numerata
+
+def celleLibereAdiacenti(mappa):
+    diz = {}
+    for i, riga in enumerate(mappa):
+        for j, colonna in enumerate(riga):
+            if mappa[i][j] > -1:
+                diz[mappa[i][j]] = []
+                if i > 0:
+                    if mappa[i - 1][j] > -1:
+                        diz[mappa[i][j]].append(mappa[i - 1][j])
+                if i+1 < len(mappa):
+                    if mappa[i + 1][j] > -1:
+                        diz[mappa[i][j]].append(mappa[i + 1][j])
+                if j > 0:
+                    if mappa[i][j - 1] > -1:
+                        diz[mappa[i][j]].append(mappa[i][j - 1])
+                if j + 1 < len(riga):
+                    if mappa[i][j + 1] > -1:
+                        diz[mappa[i][j]].append(mappa[i][j + 1])
+    return diz
 
 def main():
     """
@@ -40,16 +83,37 @@ def main():
     date: 05/02/2024
     es. 062 robot
     text: fare file csv contenente
-    0, 0, 0, 1
-    0, 1, 0, 0
-    1, 0, 0, 1
-    1, 0, 1, 1
+    3, 0, 0, 1, 0, 1
+    0, 1, 0, 0, 0, 0
+    1, 0, 0, 1, 1, 1
+    1, 0, 1, 1, 1, 0
+    0, 1, 1, 1, 0, 0
+    0, 0, 1, 0, 0, 0
     che deve essere aperto dal programma e deve creare una matrice.
-    (facoltativo) una volta ottenuta la matrice, disegnarlo in pygame
+    (facoltativo) una volta ottenuta la matrice, disegnarlo in pygame. Per ogni cella libera trovare se intorno è libera o meno
     """
-    nomeFile = 'es062.csv'
-    matrice = leggiFilCsv(nomeFile)
-    disegnaMat(matrice)
+
+    pygame.init()
+    clock = pygame.time.Clock()
+    m = matrice_da_file("es062.csv")
+
+    screen = pygame.display.set_mode((LATOX * len(m), LATOY * len(m[0])))
+    celle = [[Cella(n) for n in riga] for riga in m]
+    disegna_matrice(screen, celle)
+
+    m_numerata = matrice_numerata(m)
+
+    #print(m_numerata)
+
+    diz_adiac = celleLibereAdiacenti(m_numerata)
+    print(diz_adiac)
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+        clock.tick(60)
 
 if __name__ == "__main__":
     main() 
