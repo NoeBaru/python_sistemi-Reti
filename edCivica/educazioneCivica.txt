@@ -1,0 +1,24 @@
+ED CIVICA - SISTEMI E RETI
+correlazione: proprietà matematica che si può associare a adue grandezze che dipendono dal tempo.
+le due sono collegatepositivamente quando all'aumentare della prima aumenta anche la seconda
+le due si dicono collegate negativamente quando l'aimentare della prima la seconda diminuisce e al diminuire della prima la seconda aumenta
+la causalità è il fenomeno che lega fenomeno A e il fenomeno B
+
+se abbiamo causalità allora sono correlate, se invece a è correlato a B non è detto che implichi causalità
+
+matPlotLib
+
+presentazione a voce con voto:
+TEMA: global warming
+COSA FARE: relazione con dati presi di internet con fonti autorevoli (dati temp terra negli ultimi 100+ anni, o almeno 50)
+QUALI GRANDEZZE:
+1.temperatura della terra
+2.una grandezza legata ad essa (liveli di C02, intensità uragani, eventi estremi meterologici, scioglimento dei ghiacci)
+
+fare due grafici con questi due valori
+fare quindi tre/quattro slide massimo:
+1. grafico con fonti di info
+2. perché le due grandezze sono collegate
+
+chiede anche il codice forse
+DICHIARARE LE FONTI (LINK, TITOLO, AUTORE, ANNO DI PUBBLICAZIONE) DELLE INFORMAZIONI TROVATE SU INTERNET
