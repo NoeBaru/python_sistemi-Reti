@@ -1,9 +1,119 @@
 Nel CLI del router:
 
-ip dhcp pool laboratorio
-network 192.168.1.0 255.255.255.0
-default-router 192.168.1.1
-dns-server 8.8.8.8
-ip dhcp excluded-address 192.168.1.1 192.168.1.100
-end
-write memory
+/*
+	ip dhcp pool laboratorio
+	network 192.168.1.0 255.255.255.0
+	default-router 192.168.1.1
+	dns-server 8.8.8.8
+	ip dhcp excluded-address 192.168.1.1 192.168.1.100
+	end
+	write memory
+*/
+
+PER LA WILD MASK PRENDO SUBNET E LA NEGO (O TOLGO DA 255 IL NUMERO CHE HO)
+
+/////////////////////////////////////
+| DHCP |
+|______|
+
+//nel CLI del router e nel server invece va il sito
+
+(Non va impostato sulla singola porta ne fisica ne virtuale, ma avendo già una tabella di routing dalla configurazione appena fatta,
+non serve altro che impostare la rete corrretta corrispondente e il gateway. Alla fine salviamo la configurazione.)
+
+Router(config)#service dhcp
+Router(config)#ip dhcp pool vlan10
+Router(dhcp-config)#network 192.168.10.0 255.255.255.0
+Router(dhcp-config)#default-router 192.168.10.1
+Router(dhcp-config)#dns-server 8.8.8.8
+Router(dhcp-config)#exit
+Router(config)#ip dhcp excluded-address 192.168.10.1 192.168.10.10
+Router(config)#service dhcp
+Router(config)#ip dhcp pool vlan20
+Router(dhcp-config)#network 192.168.20.0 255.255.255.0
+Router(dhcp-config)#default-router 192.168.20.1
+Router(dhcp-config)#dns-server 8.8.8.8
+Router(dhcp-config)#exit
+Router(config)#ip dhcp excluded-address 192.168.20.1 192.168.20.10
+Router(config)#service dhcp
+Router(config)#ip dhcp pool vlan30
+Router(dhcp-config)#network 192.168.30.0 255.255.255.0
+Router(dhcp-config)#default-router 192.168.30.1
+Router(dhcp-config)#dns-server 8.8.8.8
+Router(dhcp-config)#exit
+Router(config)#ip dhcp excluded-address 192.168.30.1 192.168.30.10
+Router(config)#exit
+Router#
+%SYS-5-CONFIG_I: Configured from console by console
+
+Router#wr
+
+//////////////////////////////
+| NAT |
+|_____|
+
+Router> enable
+Router# configure terminal
+# Configura l'interfaccia interna
+Router(config)# interface FastEthernet0/0
+Router(config-if)# ip nat inside
+Router(config-if)# exit
+# Configura l'interfaccia esterna
+Router(config)# interface Serial2/0
+Router(config-if)# ip nat outside
+Router(config-if)# exit
+# Crea una lista di accesso standard per gli indirizzi interni
+Router(config)# ip access-list standard test-nat
+Router(config-std-nacl)# permit 192.168.1.0 0.0.0.255
+# Configura il NAT overload
+Router(config)# ip nat inside source list test-nat interface Serial2/0 overload
+# Esci dalla configurazione
+Router(config)# exit
+# Salva la configurazione
+Router# write memory
+
+//////////////////////////////////
+| PORT FORWARDING |
+|_________________|
+
+R1(config)#ip nat inside source static tcp 192.168.1.10 (ip del server) 80 50.50.50.1(serial 2/0 del router della LAN, NON quello ISP) 80
+<- Configure Port Forwarding
+
+R1(config)#end
+R1#wr
+
+/////////////////////////////////////
+| ROUTING STATICO |
+|_________________|
+
+TUTTI GLI IP PUBBLICI!!!
+
+nel router rete privata:
+network: ip della RETE del router di destinazione
+subnetMask: subnet del router di destinazione
+next hop: router che fa da tramite tra le due lan
+
+
+/////////////////////////////////////
+| Server HTTP |
+|_____________|
+
+Vado in un pc della rete, apro il browser e inserisco l'IP del server, dovrebbe apparire il sito.
+Dop aver fatto anche le altre due reti controllo anche gli altri siti sempre partendo da quel pc.
+
+
+
+////////////////////////////////////
+DHCP CON ESCLUSI AL CONTRARIO(ESCLUDI GLI ULTIMI E NON I PRIMI):
+
+se ip esclusi non partono dal primo IP, ma dall'ultimo devo fare:
+
+es. 192.168.1.0/25
+
+escludi gli ultimi 10 ip disponibili
+
+32 - 25(cdr) = 7
+
+2^7-2 = 126
+
+Router(config)#ip dhcp excluded-address 192.168.1.116 192.168.1.126

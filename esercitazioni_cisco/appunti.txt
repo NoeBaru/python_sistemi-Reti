@@ -79,7 +79,11 @@ per connettere pc ad LAP-PT
 						-Authentication: WPA2-PSK
 						-PSK Pass Phrase: password rete
 
-routing:
-network: ip altro router(da dove arrivano i dati) fast dell'altro router
-sub
-next hop: seriale di quel router
+- routing:
+	network: ip altro router(da dove arrivano i dati) fast dell'altro router
+	subnet
+	next hop: seriale di quel router
+
+- NAT:
+
+- PORT FORWARDING:
