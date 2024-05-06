@@ -1,3 +1,18 @@
+- attivo le porte e connetto i dispositivi staccati
+- metto ip nel router della LAN
+- imposto il Default gateway(stesso Ip del router) del Server
+- attivo la porta 1 del AP e cambio SSID, metto psw, WAPqualcosa2
+- entro nei computer wireless e mi collego alla rete
+- vado nel CLi del router PT e faccio dhcp
+- entro nei computer wireless e imposto da static a dhcp, controllando che gli IP assegnati siano giusti (non tra quelli esclusi apposta per averli statici)
+- vado nel CLI del router PT e faccio NAT e port forwarding
+- vado a fare il routing statico nel router PT
+- provo a connettermi alla pagina http (usando IP privato del router)
+- rifaccio per le altre LAN
+- provo a inviare pacchetti tra le reti
+- provo ad accedere al sito http usando l'IP di rete pubblico delle altre LAN
+
+
 Nel CLI del router:
 
 /*
@@ -77,8 +92,6 @@ Router# write memory
 |_________________|
 
 R1(config)#ip nat inside source static tcp 192.168.1.10 (ip del server) 80 50.50.50.1(serial 2/0 del router della LAN, NON quello ISP) 80
-<- Configure Port Forwarding
-
 R1(config)#end
 R1#wr
 
@@ -89,9 +102,9 @@ R1#wr
 TUTTI GLI IP PUBBLICI!!!
 
 nel router rete privata:
-network: ip della RETE del router di destinazione
-subnetMask: subnet del router di destinazione
-next hop: router che fa da tramite tra le due lan
+network: ip della RETE del router di destinazione (es172.19.0.0)
+subnetMask: subnet del router di destinazione (es. 255.255.0.0)
+next hop: IP del router che fa da tramite tra le due LAN (es 172.18.4.2)
 
 
 /////////////////////////////////////
@@ -117,3 +130,9 @@ escludi gli ultimi 10 ip disponibili
 2^7-2 = 126
 
 Router(config)#ip dhcp excluded-address 192.168.1.116 192.168.1.126
+
+////////////////////////////////////
+
+
+VLAN
+aggiungo info prese dal video di classroom e dagli screen dell'es fatto in classe
