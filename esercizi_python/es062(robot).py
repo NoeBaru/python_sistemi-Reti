@@ -45,7 +45,7 @@ def dijkstra(nodo_sorgente, matrice):
 
 def calc_pav():
     with open("maze.csv", "r") as f:
-        mat = [[int(c) for c in riga.split(", ")] for riga in f.readlines()]
+        mat = [[int(c) for c in riga.split(",")] for riga in f.readlines()]
     return mat
 
 def get_input(dir_x, dir_y, casella_player, diz, indice_x, indice_y, matrice, robot, screen, strada):
@@ -82,6 +82,7 @@ def muovi(casella_p, dir_x, dir_y, diz, indice_x, indice_y, matrice, robot, scre
         surf1 = pygame.Surface((100, 100))
         surf1.blit(strada, (0, 0))
         screen.blit(robot, ((lato_x-100)+dir_x, (lato_y-100)+dir_y))
+
 def generate_maze(rows, cols):
     maze = [[0] * cols for _ in range(rows)]
     start_row = random.randint(0, rows - 1)
@@ -117,7 +118,9 @@ def main():
     (facoltativo) una volta ottenuta la matrice, disegnarlo in pygame. Per ogni cella libera trovare se intorno è libera o meno
     """
 
-    '''lato_x = 100
+    #coordinate correnti, spostamento a livello grafico del robot, aggiustare muovi
+
+    lato_x = 100
     lato_y = 100
     pavimento = calc_pav()
     n_y = len(pavimento)
@@ -134,7 +137,7 @@ def main():
     screen = pygame.display.set_mode((n_x * lato_x , n_y * lato_y))
     muro = pygame.image.load("muro.png")
     strada = pygame.image.load("strada.jpg")
-    robot = pygame.image.load("robot.png").convert_alpha()
+    robot = pygame.image.load("robot.jpg").convert_alpha()
     font = pygame.font.SysFont("Verdana", 18) 
     
     for ind_y,riga in enumerate(pavimento):
@@ -208,14 +211,16 @@ def main():
             #print(dir_x, dir_y)
             if ev.type == QUIT:
                 done = True
-    pygame.quit()'''
-    rows = 10
-    cols = 10
+    pygame.quit()
+
+
+    rows = 5
+    cols = 5
     maze = generate_maze(rows, cols)
     save_maze_to_csv(maze, 'maze.csv')
     print("Labirinto generato e salvato in 'maze.csv'")
 
-    matrice = [[0, 4, 0], [4, 0, 3], [0, 3, 0]]
+    '''matrice = [[0, 4, 0], [4, 0, 3], [0, 3, 0]]
     sorg = int(input("inserisci il nodo sorgente: "))
     label, pred = dijkstra(sorg, matrice)
     print(label, pred)
@@ -227,7 +232,7 @@ def main():
         prec = pred[prec]
         lista.append(prec)
     lista = lista[::-1]   
-    print(lista)
+    print(lista)'''
 
 if __name__ == "__main__":
     main()
