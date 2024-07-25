@@ -3,7 +3,7 @@
 - imposto il Default gateway(stesso Ip del router) del Server
 - attivo la porta 1 del AP e cambio SSID, metto psw, WAPqualcosa2
 - entro nei computer wireless e mi collego alla rete
-- vado nel CLi del router PT e faccio dhcp
+- vado nel CLI del router PT e faccio dhcp
 - entro nei computer wireless e imposto da static a dhcp, controllando che gli IP assegnati siano giusti (non tra quelli esclusi apposta per averli statici)
 - vado nel CLI del router PT e faccio NAT e port forwarding
 - vado a fare il routing statico nel router PT
@@ -13,7 +13,7 @@
 - provo ad accedere al sito http usando l'IP di rete pubblico delle altre LAN
 
 
-Nel CLI del router:
+Es. da mettere nel CLI del router:
 
 /*
 	ip dhcp pool laboratorio
@@ -91,7 +91,16 @@ Router# write memory
 | PORT FORWARDING |
 |_________________|
 
+http:
+
 R1(config)#ip nat inside source static tcp 192.168.1.10 (ip del server) 80 50.50.50.1(serial 2/0 del router della LAN, NON quello ISP) 80
+R1(config)#end
+R1#wr
+
+DNS:
+uso UDP(funziona anche TCP, ma usiamo UDP) e porta 53
+
+R1(config)#ip nat inside source static udp 192.168.1.10 (ip del server) 53 50.50.50.1(serial 2/0 del router della LAN, NON quello ISP) 53
 R1(config)#end
 R1#wr
 
@@ -136,3 +145,38 @@ Router(config)#ip dhcp excluded-address 192.168.1.116 192.168.1.126
 
 VLAN
 aggiungo info prese dal video di classroom e dagli screen dell'es fatto in classe
+
+
+
+/////////////////////////////////
+DNS
+(Abbiamo siti configuati in modo da raggiungerli tramite ip pubblico perché por forwarding fatto)
+
+show running-config (comando per vedere tutto quello che abbiamo configurato nel router)
+
+- fare il port forwarding su tutti i server e NAT se non configurato (per server DNS uso UDP(funziona anche TCP, ma usiamo UDP) e porta 53 invece che TCP e 80 come nel server web)
+- scrivere gli IP su cui si affaccia il router e il nome del server
+- apriamo il DNS root e configuriamo la tabella del DNS con A record o NS record (es per il .com o .it) in base alla richiesta
+- se con NS bisogna associare NS a un A record che abbia l'IP del server
+
+esempio scorso esercizio:
+
+NS record
+name: .
+serverName: googleRoot (inventato)
+
+
+A record
+name: googleroot (quello inventato di prima nel server name)
+address: 8.8.8.8
+
+
+per .com (ipotizziamo che astronomia sia .com):
+
+ns record
+name: com
+server name: servercom
+
+a record
+name: servercom
+address: 10.10.5.1 (lo creo mettendo un router con switch e server)

@@ -1,0 +1,11 @@
+- andare sulla stessa rte del robot
+- cercare l'ip del proprio pc
+- scrivere su google "192.168.1.1" ip del router
+- scrivere "admin" e "admin"
+- dhcp--> dhcp client list
+- AB37 HA COME IP 192.168.1.146 porta 22
+- "pi" "raspberr" password che non si vede come su linux
+
+fare un client tcp che mandi comandi per far muovere il robot
+
+usare WinSCP e mettere l'ip del robot, nome  e password di prima
